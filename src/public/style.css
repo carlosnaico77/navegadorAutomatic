@@ -1,6 +1,6 @@
 /* 
    -------------------------------------------------------------------------
-   AURORA GLASS DESIGN SYSTEM - V3 Premium
+   SCRAPER DESIGN SYSTEM - V3 Premium
    -------------------------------------------------------------------------
 */
 
@@ -17,7 +17,7 @@
     --text-dim: #94a3b8;
     --error: #ff4b5c;
     --success: #00ffaa;
-    --gradient-aurora: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    --gradient-scraper: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     --font-outfit: 'Outfit', sans-serif;
     --font-inter: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -77,7 +77,7 @@ header {
     font-family: var(--font-outfit);
     font-size: 1.8rem;
     font-weight: 800;
-    background: var(--gradient-aurora);
+    background: var(--gradient-scraper);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -1px;
@@ -163,7 +163,7 @@ input[type="text"] {
 }
 
 button#scan-btn {
-    background: var(--gradient-aurora);
+    background: var(--gradient-scraper);
     color: #fff;
     border: none;
     padding: 0.8rem 2rem;
@@ -298,7 +298,7 @@ button#scan-btn:disabled {
 }
 
 .btn-download {
-    background: var(--gradient-aurora);
+    background: var(--gradient-scraper);
     color: #fff;
     border: none;
 }

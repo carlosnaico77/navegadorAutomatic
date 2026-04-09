@@ -1,12 +1,12 @@
-# 🌌 Aurora Scraper | Platinum Edition 🚀
+# 🌌 Scraper | Platinum Edition 🚀
 
-**Aurora Scraper** es una plataforma profesional de automatización y clonación de sitios web, diseñada bajo una arquitectura **Orientada a Objetos (POO)** de alta fidelidad. Combina el poder de **Playwright** con una interfaz de usuario **Aurora Glass** de vanguardia para ofrecer una experiencia de mirroring web sin precedentes.
+**Scraper** es una plataforma profesional de automatización y clonación de sitios web, diseñada bajo una arquitectura **Orientada a Objetos (POO)** de alta fidelidad. Combina el poder de **Playwright** con una interfaz de usuario de vanguardia para ofrecer una experiencia de mirroring web sin precedentes.
 
 ---
 
 ## 🌟 Características de Clase Mundial
 
-### 🎨 Dashboard Aurora Glass
+### 🎨 Dashboard Premium
 Interactúa con una interfaz moderna y premium con estética de vidrio esmerilado (`backdrop-blur`), efectos de neón y una terminal de monitorización en tiempo real vía WebSockets. Una herramienta diseñada no solo para funcionar, sino para impresionar.
 
 ### 🔐 Persistencia de Sesión e Inteligencia Auth
