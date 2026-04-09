@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Scraper</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="dot"></span>
+                <h1>Scanner<span>Ultra</span></h1>
+            </div>
+            <div class="status-badge">
+                <span id="server-status">En línea</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="control-panel">
+                <div class="input-group">
+                    <input type="text" id="url-input" placeholder="Ingresa URL (ej: https://google.com)" autocomplete="off">
+                    <div class="button-row">
+                        <button id="scan-btn">Escaneo Rápido</button>
+                    </div>
+                </div>
+                
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <span>Terminal de Logs</span>
+                        <div class="controls">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div id="logs" class="terminal-body">
+                        <div class="log-entry system">> Sistema listo. Esperando URL...</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="results-panel">
+                <div class="section-header">
+                    <h2>Páginas Capturadas</h2>
+                    <span id="results-count">0 resultados</span>
+                </div>
+                <div id="pages-grid" class="pages-grid">
+                    <!-- Las carpetas/páginas aparecerán aquí -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

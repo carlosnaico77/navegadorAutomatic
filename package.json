@@ -1,0 +1,34 @@
+{
+  "name": "navegador-automatic",
+  "version": "1.0.0",
+  "description": "Herramienta avanzada de automatización y clonación de sitios web con dashboard interactivo, extracción profunda de recursos (CSS/Fuentes/Imágenes) y visualización offline.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "start": "tsc && node dist/index.js",
+    "dashboard": "tsc && node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Carlos Lozano",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jsdom": "^28.0.1",
+    "@types/node": "^20.19.39",
+    "tsx": "^4.21.0",
+    "typescript": "5.4"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "axios": "^1.15.0",
+    "axios-retry": "^4.5.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "jsdom": "^29.0.2",
+    "playwright": "^1.59.1",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3"
+  }
+}
