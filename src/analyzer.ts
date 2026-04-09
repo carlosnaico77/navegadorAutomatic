@@ -1,51 +1,59 @@
-import { chromium, Browser, Page } from 'playwright';
+import { chromium, BrowserContext, Page } from 'playwright';
+import path from 'node:path';
 
 export interface ScraperOptions {
   headless?: boolean;
 }
 
 export class ScraperEngine {
-  private browser: Browser | null = null;
+  private context: BrowserContext | null = null;
   private headless: boolean;
+  private authPath: string;
 
   constructor(options: ScraperOptions = {}) {
     this.headless = options.headless !== undefined ? options.headless : true;
+    this.authPath = path.join(process.cwd(), 'src', 'auth');
   }
 
   /**
-   * Inicializa el navegador
+   * Inicializa el contexto persistente
    */
   public async init() {
-    if (this.browser) return;
-    this.browser = await chromium.launch({ headless: this.headless });
+    if (this.context) return;
+    
+    // Configuración solicitada para persistencia y evasión
+    this.context = await chromium.launchPersistentContext(this.authPath, {
+      headless: this.headless,
+      channel: 'chrome',
+      args: ['--disable-blink-features=AutomationControlled', '--no-sandbox'],
+      viewport: { width: 1280, height: 720 }
+    });
   }
 
   /**
-   * Realiza el escaneo de una URL (abriendo nueva página)
+   * Realiza el escaneo de una URL (usando el contexto persistente)
    */
   public async scrape(url: string, onLog: (msg: string) => void) {
-    if (!this.browser) await this.init();
-    const context = await this.browser!.newContext();
-    const page = await context.newPage();
+    if (!this.context) await this.init();
+    const page = await this.context!.newPage();
 
     try {
-      onLog(`Navegando a: ${url}`);
-      await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+      onLog(`Navegando a: ${url} (Modo Persistente)`);
+      // Aumentamos el timeout para sitios con login pesado
+      await page.goto(url, { waitUntil: 'networkidle', timeout: 90000 });
       return await this.extract(page, onLog);
     } finally {
       await page.close();
-      await context.close();
     }
   }
 
   /**
-   * Extrae datos de una página ya abierta (útil para modo Live)
+   * Extrae datos de una página ya abierta
    */
   public async extract(page: Page, onLog: (msg: string) => void) {
     if (page.isClosed()) throw new Error('La página se cerró antes de iniciar la extracción');
     
     try {
-      // Auto-scroll (puede fallar si la navegación cambia muy rápido)
       onLog('Extrayendo snapshot (Auto-scroll habilitado)...');
       await this.autoScroll(page);
       await page.waitForTimeout(1000);
@@ -54,48 +62,23 @@ export class ScraperEngine {
       const rawHtml = await page.content();
       const screenshot = await page.screenshot({ fullPage: true });
 
-      // @ts-ignore
-      const ariaSnapshot = await page.ariaSnapshot();
-      const elementos = await page.$$eval('button, a, input, select', (nodes) => {
-        return nodes.map(node => {
-          const el = node as HTMLElement;
-          return {
-            tag: el.tagName,
-            texto: el.innerText || (el as HTMLInputElement).value || el.getAttribute('aria-label') || '',
-            role: el.getAttribute('role'),
-            id: el.id,
-            clases: el.className
-          };
-        });
-      });
-
       return {
         titulo,
         html: rawHtml,
-        screenshot: screenshot.toString('base64'),
-        ariaSnapshot,
-        elementos
+        screenshot: screenshot.toString('base64')
       };
     } catch (e) {
       throw new Error(`Error durante la extracción: ${(e as Error).message}`);
     }
   }
 
-  public async createLiveBrowser() {
-    // Obligamos a que el navegador se vea (headless: false)
-    const liveBrowser = await chromium.launch({ headless: false });
-    const context = await liveBrowser.newContext();
-    const page = await context.newPage();
-    return { liveBrowser, page };
-  }
-
   /**
-   * Cierra el navegador
+   * Cierra el contexto (y el navegador asociado)
    */
   public async close() {
-    if (this.browser) {
-      await this.browser.close();
-      this.browser = null;
+    if (this.context) {
+      await this.context.close();
+      this.context = null;
     }
   }
 

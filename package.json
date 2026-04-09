@@ -8,6 +8,7 @@
     "dev": "tsx src/index.ts",
     "start": "tsc && node dist/index.js",
     "dashboard": "tsc && node dist/server.js",
+    "login": "tsc && node dist/auth-session.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

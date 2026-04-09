@@ -1,49 +1,67 @@
-# Scraper Ultra 🚀 (Modo Estable)
+# 🌌 Aurora Scraper | Platinum Edition 🚀
 
-Herramienta profesional de automatización, clonación y análisis de sitios web basada en una arquitectura **Orientada a Objetos (POO)** limpia y escalable.
+**Aurora Scraper** es una plataforma profesional de automatización y clonación de sitios web, diseñada bajo una arquitectura **Orientada a Objetos (POO)** de alta fidelidad. Combina el poder de **Playwright** con una interfaz de usuario **Aurora Glass** de vanguardia para ofrecer una experiencia de mirroring web sin precedentes.
 
-## 🌟 Características de Nivel Pro
+---
 
-- **Arquitectura Modular POO**: Sistema diseñado con desacoplamiento total, facilitando la extensión del código.
-- **Clonación Offline de Alta Fidelidad**: Captura física de HTML, CSS e imágenes (procesamiento recursivo de recursos).
-- **Dashboard Visual Premium**: Interfaz moderna con logs en tiempo real vía WebSockets para una monitorización total.
-- **Inteligencia de Rutas**: Normalización automática de URLs (ej: `/` se traduce de forma inteligente a `/inicio`) para una organización de archivos perfecta.
-- **Auto-Scroll & Renderizado**: Espera inteligente para asegurar que el contenido cargado por JavaScript se capture correctamente.
+## 🌟 Características de Clase Mundial
 
-## 🛠️ Arquitectura del Sistema
+### 🎨 Dashboard Aurora Glass
+Interactúa con una interfaz moderna y premium con estética de vidrio esmerilado (`backdrop-blur`), efectos de neón y una terminal de monitorización en tiempo real vía WebSockets. Una herramienta diseñada no solo para funcionar, sino para impresionar.
 
-El proyecto se divide en componentes especializados:
+### 🔐 Persistencia de Sesión e Inteligencia Auth
+Gracias a su integración con `launchPersistentContext`, Aurora puede heredar tus sesiones activas. 
+- **Alimentación de Credenciales**: Usa el comando `npm run login` para entrar manualmente a sitios, loguearte y "enseñar" al bot tus accesos.
+- **Acceso a Portales Privados**: Una vez logueado, el bot puede clonar áreas privadas de portales web como si fueras un usuario real navegando.
 
-1.  **`ScraperEngine`** (en `analyzer.ts`): Gestiona el ciclo de vida de Playwright y la extracción de datos crudos.
-2.  **`ResourceDownloader`** (en `downloader.ts`): Motor de descargas con caché de sesión y reescritura de rutas CSS.
-3.  **`StorageManager`**: Cerebro de la persistencia que organiza el árbol de directorios de salida.
-4.  **`AnalysisOrchestrator`**: Coordinador central que une todas las piezas en un flujo de trabajo unificado.
+### 🛠️ Arquitectura Modular Pro
+El sistema está construido sobre cimientos de código limpio:
+- **`ScraperEngine`**: Motor persistente con evasión de detección (Channel Chrome).
+- **`ResourceDownloader`**: Clonación recursiva de activos con caché inteligente.
+- **`StorageManager`**: Organización perfecta de archivos basada en dominios y rutas.
+- **`AnalysisOrchestrator`**: El cerebro que coordina la extracción y la persistencia.
 
-## 🚀 Inicio Rápido
+---
 
-### Instalación
+## 🚀 Guía de Inicio Rápido
+
+### 1. Instalación
+Prepara el entorno instalando las dependencias:
 ```bash
 npm install
 ```
 
-### Ejecutar el Dashboard (Recomendado)
+### 2. Alimentar el Sistema (Auth)
+Si necesitas clonar sitios que requieren login, inicia una sesión manual:
+```bash
+npm run login
+```
+*Se abrirá Chrome. Loguéate en los sitios que necesites y cierra el navegador para guardar la sesión.*
+
+### 3. Lanzar el Dashboard
+Inicia el centro de control interactivo:
 ```bash
 npm run dashboard
 ```
-Accede a la interfaz en [http://localhost:3000](http://localhost:3000).
-
-### Ejecutar vía Consola (CLI)
-```bash
-npm run dev https://url-que-quieras.com
-```
-
-## 📂 Organización de Salida
-
-Cada análisis genera una estructura limpia en la carpeta `outputs/`:
-- `analisis.html`: El sitio clonado y listo para navegar offline.
-- `captura.png`: Snapshot visual a pantalla completa.
-- `assets/`: Todos los recursos (imágenes, estilos) aislados por página.
+Accede en: [http://localhost:3000](http://localhost:3000)
 
 ---
-Mantenido bajo estándares de código limpio y POO.
-Creado por Carlos Lozano.
+
+## 📂 Organización de Salida (Mirroring)
+
+Cada escaneo genera una estructura autocontenida en la carpeta `outputs/`:
+- `analisis.html`: El clon idéntico del sitio, listo para navegar offline.
+- `captura.png`: Snapshot visual de alta resolución para previsualización.
+- `assets/`: Galería de recursos locales (CSS, JS, Imágenes) procesados para fidelidad total.
+
+---
+
+## 🛡️ Evasión y Seguridad
+El sistema utiliza configuraciones avanzadas para evitar ser detectado por cortafuegos comunes:
+- Desactivación de `AutomationControlled`.
+- Uso de binarios oficiales de Chrome.
+- Gestión de `user-agent` real y persistencia de cookies.
+
+---
+**Proyecto desarrollado con estándares POO y Clean Code.**  
+Mantenido por **Carlos Lozano**.
