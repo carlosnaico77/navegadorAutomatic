@@ -9,6 +9,7 @@
     "start": "tsc && node dist/index.js",
     "dashboard": "tsc && node dist/server.js",
     "login": "tsc && node dist/auth-session.js",
+    "record": "tsc && node dist/manual-recorder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

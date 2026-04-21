@@ -373,3 +373,431 @@ button#scan-btn:disabled {
     }
     h1 { font-size: 2.5rem; }
 }
+
+/* ═══ GRABACIÓN MANUAL ═══════════════════════════════════════════════════════ */
+
+.record-section {
+    margin: 0 2.5rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.75rem 2rem;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.record-section.recording {
+    border-color: rgba(255, 60, 60, 0.5);
+    box-shadow: 0 0 30px rgba(255, 60, 60, 0.12);
+    animation: recordPulse 2s infinite;
+}
+
+@keyframes recordPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 60, 60, 0.10); }
+    50%       { box-shadow: 0 0 40px rgba(255, 60, 60, 0.22); }
+}
+
+.record-header { margin-bottom: 1.25rem; }
+
+.record-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+}
+
+.record-icon {
+    font-size: 0.7rem;
+    color: #ff4444;
+    animation: none;
+}
+
+.recording .record-icon {
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.1; }
+}
+
+.record-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.record-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin: 0;
+    padding-left: 1.45rem;
+}
+
+.record-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-secondary);
+    border: 1px solid rgba(255,255,255,0.1);
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.record-badge.active {
+    background: rgba(255, 60, 60, 0.15);
+    color: #ff6b6b;
+    border-color: rgba(255, 60, 60, 0.35);
+}
+
+.record-badge.done {
+    background: rgba(40, 200, 100, 0.15);
+    color: #4ade80;
+    border-color: rgba(40, 200, 100, 0.35);
+}
+
+.record-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.record-inputs {
+    display: flex;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 300px;
+}
+
+.record-inputs input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.65rem 1rem;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.record-inputs input:focus {
+    border-color: rgba(255, 60, 60, 0.5);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.record-inputs input::placeholder { color: var(--text-secondary); }
+
+.record-buttons {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.btn-record-start, .btn-record-stop {
+    padding: 0.65rem 1.4rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-record-start {
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 60, 60, 0.3);
+}
+
+.btn-record-start:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 60, 60, 0.45);
+}
+
+.btn-record-start:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-record-stop {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+.btn-record-stop:not(:disabled) {
+    color: var(--text-primary);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.btn-record-stop:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.btn-record-stop:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* Stats en vivo */
+.record-stats {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.9rem;
+}
+
+.stat-pill {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.recording .stat-pill { color: var(--text-primary); }
+
+/* Mini-terminal de grabación */
+.record-terminal {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 180px;
+}
+
+.record-terminal-body {
+    padding: 0.75rem 1rem;
+    overflow-y: auto;
+    max-height: 180px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+}
+
+.record-log-entry {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+    animation: slideIn 0.15s ease;
+}
+
+.record-log-entry:last-child { color: var(--text-primary); }
+
+/* Badges en cards del explorador */
+.card-type-badge {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.2rem 0.65rem;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+}
+
+.card-type-badge.grabacion {
+    background: rgba(255, 60, 60, 0.25);
+    color: #ff9999;
+    border: 1px solid rgba(255,60,60,0.35);
+}
+
+.card-type-badge.escaneo {
+    background: rgba(100, 100, 255, 0.2);
+    color: #aaaaff;
+    border: 1px solid rgba(100,100,255,0.3);
+}
+
+/* ═══ FASES DEL GRABADOR ════════════════════════════════════════════════════ */
+
+.record-section.browser-open {
+    border-color: rgba(40, 200, 100, 0.3);
+    box-shadow: 0 0 20px rgba(40, 200, 100, 0.06);
+}
+
+.record-badge.browser-open {
+    background: rgba(40, 200, 100, 0.12);
+    color: #4ade80;
+    border-color: rgba(40, 200, 100, 0.3);
+}
+
+.record-phase {
+    margin-bottom: 0.9rem;
+}
+
+.phase-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+}
+
+.record-controls {
+    display: flex;
+    gap: 0.65rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.record-url-input,
+.record-section-input {
+    flex: 1;
+    min-width: 220px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.record-url-input:focus {
+    border-color: rgba(40, 200, 100, 0.4);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.record-section-input:focus {
+    border-color: rgba(255, 60, 60, 0.4);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.record-url-input::placeholder,
+.record-section-input::placeholder { color: var(--text-secondary); }
+
+.record-url-input:disabled,
+.record-section-input:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Botones de navegador */
+.btn-open-browser,
+.btn-close-browser {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-open-browser {
+    background: linear-gradient(135deg, #28c864, #16a34a);
+    color: white;
+    box-shadow: 0 4px 14px rgba(40, 200, 100, 0.3);
+}
+
+.btn-open-browser:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(40, 200, 100, 0.45);
+}
+
+.btn-open-browser:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-close-browser {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-secondary);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+.btn-close-browser:not(:disabled) {
+    color: #f87171;
+    border-color: rgba(248,113,113,0.3);
+}
+
+.btn-close-browser:hover:not(:disabled) {
+    background: rgba(248,113,113,0.1);
+    transform: translateY(-1px);
+}
+
+.btn-close-browser:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* Botones de grabación */
+.btn-record-start, .btn-record-stop {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-record-start {
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+    color: white;
+    box-shadow: 0 4px 14px rgba(255, 60, 60, 0.3);
+}
+
+.btn-record-start:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 60, 60, 0.45);
+}
+
+.btn-record-start:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+.btn-record-stop {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-secondary);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+.btn-record-stop:not(:disabled) {
+    color: var(--text-primary);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.btn-record-stop:hover:not(:disabled) {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
+.btn-record-stop:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* Checkbox "Grabar desde el inicio" */
+.record-on-open-label {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.record-on-open-label:hover {
+    border-color: rgba(255, 60, 60, 0.35);
+    color: #ff9999;
+    background: rgba(255, 60, 60, 0.07);
+}
+
+.record-on-open-label input[type="checkbox"] {
+    accent-color: #ff4444;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}

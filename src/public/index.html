@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Dashboard Header -->
+        <!-- Header -->
         <header>
             <div class="logo-brand">SCRAPER.</div>
             <div class="status-badge">
@@ -17,38 +17,82 @@
             </div>
         </header>
 
-        <!-- Main Action Section -->
+        <!-- Escaneo Rápido -->
         <section class="hero-section">
             <h1>Clona la web con elegancia.</h1>
             <p class="subtitle">Herramienta profesional de extracción y mirroring automático de alta fidelidad.</p>
-            
             <div class="input-box">
                 <input type="text" id="url-input" placeholder="Ingresa una URL (ej: https://example.com)" autocomplete="off">
                 <button id="scan-btn">Escaneo Rápido</button>
             </div>
         </section>
 
-        <!-- Main Workspace Grid -->
+        <!-- ═══ GRABACIÓN MANUAL ═══════════════════════════════════════════ -->
+        <section class="record-section" id="record-section">
+            <div class="record-header">
+                <div class="record-title-group">
+                    <span class="record-icon" id="record-icon">⬤</span>
+                    <h2 class="record-title">Grabación Manual</h2>
+                    <span class="record-badge" id="record-status-badge">Sin navegador</span>
+                </div>
+                <p class="record-desc">Abre Chrome, navega libremente y graba solo las secciones que te interesen — cuando tú quieras.</p>
+            </div>
+
+            <!-- FASE 1: Abrir navegador -->
+            <div class="record-phase" id="phase-open">
+                <div class="phase-label">① Abrir navegador</div>
+                <div class="record-controls">
+                    <input type="text" id="browser-url" placeholder="URL de inicio (ej: https://fibex.saeplus.com)" autocomplete="off" class="record-url-input">
+                    <input type="text" id="record-section-name" placeholder="Nombre de sección (ej: login, ventas)" autocomplete="off" class="record-section-input">
+                    <label class="record-on-open-label" title="Empieza a grabar automáticamente cuando abra Chrome">
+                        <input type="checkbox" id="record-on-open">
+                        <span>Grabar desde el inicio</span>
+                    </label>
+                    <button id="open-browser-btn" class="btn-open-browser">🌐 Abrir Navegador</button>
+                    <button id="close-browser-btn" class="btn-close-browser" disabled>✕ Cerrar</button>
+                </div>
+            </div>
+
+            <!-- FASE 2: Grabar sección adicional (cuando el navegador ya está abierto) -->
+            <div class="record-phase" id="phase-record">
+                <div class="phase-label">② Grabar otra sección (navega primero, luego graba)</div>
+                <div class="record-controls">
+                    <input type="text" id="record-section-name-2" placeholder="Nombre de la nueva sección" autocomplete="off" class="record-section-input" disabled>
+                    <button id="record-start-btn" class="btn-record-start" disabled>⬤ Iniciar Grabación</button>
+                    <button id="record-stop-btn" class="btn-record-stop" disabled>⏹ Detener</button>
+                </div>
+            </div>
+
+            <!-- Stats en vivo -->
+            <div class="record-stats" id="record-stats" style="display:none">
+                <div class="stat-pill" id="stat-apis">🔵 APIs: 0</div>
+                <div class="stat-pill" id="stat-assets">📦 Assets: 0</div>
+                <div class="stat-pill" id="stat-snaps">💾 Snaps: 0</div>
+                <div class="stat-pill" id="stat-time">⏱ 0s</div>
+            </div>
+
+            <!-- Mini terminal de grabación -->
+            <div class="record-terminal" id="record-terminal" style="display:none">
+                <div class="record-terminal-body" id="record-logs"></div>
+            </div>
+        </section>
+
+        <!-- Workspace Grid -->
         <div class="content-grid">
-            
-            <!-- Left Panel: Results Grid -->
             <main class="results-panel">
                 <div class="results-header">
                     <h2>Explorador de Clones</h2>
                     <button id="refresh-btn" class="refresh-btn" title="Actualizar lista">↻</button>
                 </div>
-                
                 <div class="results-grid" id="results-grid">
-                    <!-- Cards injected by app.js -->
                     <div class="status-message">Cargando biblioteca de clones...</div>
                 </div>
             </main>
 
-            <!-- Right Panel: Terminal Console -->
             <aside class="terminal-wrapper">
                 <div class="terminal-header">
                     <div class="terminal-dot" style="background: #ff5f56;"></div>
-                    <div class="terminal-dot" style="background: var(--gradient-scraper);"></div>
+                    <div class="terminal-dot" style="background: #ffbd2e;"></div>
                     <div class="terminal-dot" style="background: #27c93f;"></div>
                     <span class="terminal-title">Monitor de Sistema</span>
                 </div>
@@ -56,7 +100,6 @@
                     <div class="log-entry">Esperando órdenes en el puerto 3000...</div>
                 </div>
             </aside>
-
         </div>
     </div>
 
